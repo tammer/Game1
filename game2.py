@@ -1,9 +1,9 @@
 from random import random
+from colorama import Fore, Style
 import os
 import time
-import sys
-os.system("cls")
 
+os.system("cls")
 
 dungon = 1
 room_num = 0
@@ -46,20 +46,58 @@ def new_room():
 def wait():
     print("")
     print(" .", end="\r")
-    time.sleep(1)
+    time.sleep(0.5)
     print(" ..", end="\r")
-    time.sleep(1)
+    time.sleep(0.5)
     print(" ...", end="\r")
+
+def movement():
+    print("1. Advance rooms")
+    print("2. Inventory")
+    print("3. Leave dungon")
+
+    action = input()
+
+
+def leave_dungon():
+    leave_dungon_y_n = input("Are you sure you want to leave dungon, all progress will be lost, Y or N")
+    if leave_dungon_y_n == "y" or "Y":
+        print("")
+        #Go back to home base
+    if leave_dungon_y_n == "n" or "N":
+  --->  else leave_dungon()    <---
+
+
+#*************************************************************************
+#Is there a way to get this funtion to restart without using a loop
+#*************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 room = new_room()
 
-
+movement()
 
 charname = input("What is your name?: ")
 
-wait()
+if charname == "1":
+    print("wait bypassed")
+else:   
+    wait()
 
 time.sleep(1)
 os.system("cls")
@@ -77,35 +115,25 @@ print("Current room : ")
 print(room)
 print("")
 
+
+
 print("What do you do?")
 print("1. Attack")
 print("2. Retreat")
 print("3. Run to next room")
 action = input()
 if action == "1":
+
     print("You attack the monster!")
-    print("You deal "+ str(max((player.strength - room.monster.defence),0)) +"damage")
-    
-    room.monster.health -= max((player.strength - room.monster.defence),0)
+
+    print("You deal "+ str(max((player.strength - room.monster.defence),0)) +" damage")
+
+    room.monster.health -= max((room.monster.health - (player.strength - room.monster.defence)),0)
     print("The monster now has " + str(room.monster.health) + " health.")
+    
     print("You now have " + str(player.health) + " health.")
     player.health -= max((room.monster.strength - player.defence),0)
 
     if player.health <= 0:
         print("You have died.")
         exit()
-
-if action == "2":
-    retreatChance = 1
-    print("You have a" + retreatChance + "% to excape")
-    print("You deal ____")
-    
-    room.monster.health -= max((player.strength - room.monster.defence),0)
-    print("The monster now has " + str(room.monster.health) + " health.")
-    print("You now have " + str(player.health) + " health.")
-    player.health -= max((room.monster.strength - player.defence),0)
-
-    if player.health <= 0:
-        print("You have died.")
-        exit()
-
